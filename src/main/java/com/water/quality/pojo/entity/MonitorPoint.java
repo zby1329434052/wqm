@@ -2,19 +2,20 @@ package com.water.quality.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
  * 监测点表
  * </p>
  *
- * @author 
+ * @author
  * @since 2022-02-10
  */
 @Data
@@ -25,9 +26,9 @@ public class MonitorPoint implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
-    @ApiModelProperty(value = "维度")
+    @ApiModelProperty(value = "纬度")
     private Double lat;
 
     @ApiModelProperty(value = "经度")
@@ -49,7 +50,7 @@ public class MonitorPoint implements Serializable {
     private String name;
 
     @ApiModelProperty(value = "唯一节点序号")
-    private Integer nodeId;
+    private Long nodeId;
 
     @ApiModelProperty(value = "最新的深度")
     private Double latestDepth;
@@ -58,7 +59,7 @@ public class MonitorPoint implements Serializable {
     private Integer pollutionStatus;
 
     @ApiModelProperty(value = "周围环境状况")
-    private String condition;
+    private String conditionInfo;
 
     @ApiModelProperty(value = "水域信息")
     private String waterInfo;
@@ -73,10 +74,10 @@ public class MonitorPoint implements Serializable {
     private LocalDateTime updateTime;
 
     @ApiModelProperty(value = "创建人id")
-    private Integer creatorId;
+    private Long creatorId;
 
     @ApiModelProperty(value = "更新人id")
-    private Integer editorId;
+    private Long editorId;
 
 
 }

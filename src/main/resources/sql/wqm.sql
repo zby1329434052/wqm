@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2022-02-10 23:21:22
+Date: 2022-02-11 10:44:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `monitor_point`;
 CREATE TABLE `monitor_point` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lat` double(20,6) NOT NULL COMMENT '维度',
+  `lat` double(20,6) NOT NULL COMMENT '纬度',
   `lng` double(20,6) NOT NULL COMMENT '经度',
   `wq_type_name` varchar(50) NOT NULL COMMENT '监测点当前的水质类别名称',
   `city` varchar(10) DEFAULT NULL COMMENT '市',
@@ -31,7 +31,7 @@ CREATE TABLE `monitor_point` (
   `node_id` int(11) NOT NULL COMMENT '唯一节点序号',
   `latest_depth` double(10,2) DEFAULT NULL COMMENT '最新的深度',
   `pollution_status` tinyint(2) DEFAULT NULL COMMENT '0正常 1污染',
-  `condition` varchar(255) DEFAULT NULL COMMENT '周围环境状况',
+  `condition_info` varchar(255) DEFAULT NULL COMMENT '周围环境状况',
   `water_info` varchar(255) DEFAULT NULL COMMENT '水域信息',
   `depth_list` varchar(255) DEFAULT NULL COMMENT '深度列表',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -39,11 +39,7 @@ CREATE TABLE `monitor_point` (
   `creator_id` int(11) DEFAULT NULL COMMENT '创建人id',
   `editor_id` int(11) DEFAULT NULL COMMENT '更新人id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='监测点表';
-
--- ----------------------------
--- Records of monitor_point
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='监测点表';
 
 -- ----------------------------
 -- Table structure for monitor_point_data
@@ -55,7 +51,7 @@ CREATE TABLE `monitor_point_data` (
   `monitor_point_id` int(11) NOT NULL COMMENT '监测点id',
   `montior_point_node_id` int(11) DEFAULT NULL COMMENT '监测点节点序号',
   `pollution_record_id` int(11) DEFAULT NULL COMMENT '污染记录id',
-  `lat` double(20,6) NOT NULL COMMENT '维度',
+  `lat` double(20,6) NOT NULL COMMENT '纬度',
   `lng` double(20,6) NOT NULL COMMENT '经度',
   `city` varchar(10) DEFAULT NULL COMMENT '市',
   `district` varchar(20) DEFAULT NULL COMMENT '区',
@@ -86,11 +82,7 @@ CREATE TABLE `monitor_point_data` (
   `creator_id` int(11) DEFAULT NULL COMMENT '创建人id',
   `editor_id` int(11) DEFAULT NULL COMMENT '更新人id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='监测点数据表';
-
--- ----------------------------
--- Records of monitor_point_data
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='监测点数据表';
 
 -- ----------------------------
 -- Table structure for notice
@@ -107,11 +99,7 @@ CREATE TABLE `notice` (
   `creator_id` int(11) DEFAULT NULL COMMENT '创建人id',
   `editor_id` int(11) DEFAULT NULL COMMENT '更新人id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='消息通知表';
-
--- ----------------------------
--- Records of notice
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='消息通知表';
 
 -- ----------------------------
 -- Table structure for pollution_record
@@ -120,25 +108,21 @@ DROP TABLE IF EXISTS `pollution_record`;
 CREATE TABLE `pollution_record` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) DEFAULT NULL COMMENT '标题 保存超标参数',
-  `start_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL COMMENT '污染开始时间',
+  `end_time` datetime DEFAULT NULL COMMENT '污染结束时间',
   `level` tinyint(2) DEFAULT NULL COMMENT '污染等级',
   `pollution_analyse` varchar(255) DEFAULT NULL COMMENT '污染源分析',
   `measure` varchar(255) DEFAULT NULL COMMENT '治理措施',
   `measure_effect` varchar(255) DEFAULT NULL COMMENT '治理效果',
   `monitor_point_node_id` int(11) DEFAULT NULL COMMENT '监测点节点id',
-  `monitor_point_id` varchar(255) DEFAULT NULL COMMENT '监测点id',
+  `monitor_point_id` int(11) DEFAULT NULL COMMENT '监测点id',
   `depth` double(10,2) DEFAULT NULL COMMENT '深度值',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `creator_id` int(11) DEFAULT NULL COMMENT '创建人id',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `editor_id` int(11) DEFAULT NULL COMMENT '更新人id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='污染记录表';
-
--- ----------------------------
--- Records of pollution_record
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='污染记录表';
 
 -- ----------------------------
 -- Table structure for user
@@ -152,12 +136,7 @@ CREATE TABLE `user` (
   `permission` varchar(255) DEFAULT NULL COMMENT '权限：资源ID列表，多个逗号分割',
   PRIMARY KEY (`id`),
   UNIQUE KEY `i_username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户';
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', null);
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户';
 
 -- ----------------------------
 -- Table structure for wq_param
@@ -174,11 +153,7 @@ CREATE TABLE `wq_param` (
   `creator_id` int(11) DEFAULT NULL COMMENT '创建人id',
   `editor_id` int(11) DEFAULT NULL COMMENT '更新人id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='水质参数表';
-
--- ----------------------------
--- Records of wq_param
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='水质参数表';
 
 -- ----------------------------
 -- Table structure for wq_param_type
@@ -192,11 +167,7 @@ CREATE TABLE `wq_param_type` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `editor_id` int(11) DEFAULT NULL COMMENT '更新人id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='水质参数种类';
-
--- ----------------------------
--- Records of wq_param_type
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='水质参数种类';
 
 -- ----------------------------
 -- Table structure for wq_type
@@ -208,10 +179,6 @@ CREATE TABLE `wq_type` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `creator_id` int(11) DEFAULT NULL COMMENT '创建人id',
-  `editor` int(11) DEFAULT NULL COMMENT '更新人id',
+  `editor_id` int(11) DEFAULT NULL COMMENT '更新人id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='水质类别表';
-
--- ----------------------------
--- Records of wq_type
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='水质类别表';

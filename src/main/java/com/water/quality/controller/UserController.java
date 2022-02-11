@@ -13,8 +13,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * <p>
  * 用户 前端控制器
@@ -23,7 +21,7 @@ import java.util.List;
  * @author
  * @since 2022-02-10
  */
-@Api(tags = "管理员登录服务")
+@Api(tags = "用户管理")
 @CrossOrigin
 @RestController
 @RequestMapping("/api/user")
@@ -35,10 +33,10 @@ public class UserController {
     @ApiOperation("查询用户")
     @GetMapping("/search/user/{username}")
     public R searchUser(@PathVariable("username") @ApiParam(value = "用户名", required = true) String username) {
-        List<User> user = userService.list(new QueryWrapper<User>()
+        User user = userService.getOne(new QueryWrapper<User>()
                 .eq("username", username));
-        Assert.isTrue(user.size()>0, ResponseEnum.DATABASE_NULL_ERROR);
-        return R.ok().data("user", user.get(0));
+        Assert.notNull(user, ResponseEnum.DATABASE_NULL_ERROR);
+        return R.ok().data("user", user);
     }
 }
 
