@@ -127,8 +127,8 @@ public class MonitorPointData implements Serializable {
     private Boolean mno4Out;
 
     @ApiModelProperty(value = "数据是否被查看")
-    @TableField("is_check")
-    private Boolean check;
+    @TableField("is_checked")
+    private Boolean checked;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;

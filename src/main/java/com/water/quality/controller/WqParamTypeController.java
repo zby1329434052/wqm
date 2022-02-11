@@ -33,6 +33,10 @@ public class WqParamTypeController {
     @Autowired
     private WqParamTypeService wqParamTypeService;
 
+    /**
+     * 获取所有水质参数类别 todo:分页
+     * @return
+     */
     @ApiOperation("查询水质参数类别列表")
     @GetMapping("/list")
     public R list() {

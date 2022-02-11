@@ -78,7 +78,7 @@ class DbMapperTest {
         monitorPointData.setTurbidityOut(false);
         monitorPointData.setNh3nOut(false);
         monitorPointData.setMno4Out(false);
-        monitorPointData.setCheck(false);
+        monitorPointData.setChecked(false);
         monitorPointData.setCreateTime(LocalDateTime.now());
         monitorPointData.setUpdateTime(LocalDateTime.now());
         monitorPointData.setCreatorId(1l);
@@ -153,7 +153,7 @@ class DbMapperTest {
     @Test
     void wqParamMapper() {
         WqParam wqParam = new WqParam();
-        wqParam.setWqTypeId(1l);
+        wqParam.setWqTypeId(3l);
         wqParam.setWqParamTypeId(1l);
         wqParam.setMaxConcentration(1.0);
         wqParam.setMinConcentration(0.0);

@@ -1,8 +1,11 @@
 package com.water.quality.mapper;
 
-import com.water.quality.pojo.entity.WqParam;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.water.quality.pojo.entity.WqParam;
+import com.water.quality.pojo.vo.WqParamVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface WqParamMapper extends BaseMapper<WqParam> {
 
+    List<WqParamVo> listWithName();
 }

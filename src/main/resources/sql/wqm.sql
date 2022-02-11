@@ -76,7 +76,7 @@ CREATE TABLE `monitor_point_data` (
   `is_turbidity_out` tinyint(1) DEFAULT NULL COMMENT '浑浊度是否超标',
   `is_nh3n_out` tinyint(1) DEFAULT NULL COMMENT '氨氮是否超标',
   `is_mno4_out` tinyint(1) DEFAULT NULL COMMENT '高猛酸盐是否超标',
-  `is_check` tinyint(1) DEFAULT NULL COMMENT '数据是否被查看',
+  `is_checked` tinyint(1) DEFAULT NULL COMMENT '数据是否被查看',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `creator_id` int(11) DEFAULT NULL COMMENT '创建人id',
